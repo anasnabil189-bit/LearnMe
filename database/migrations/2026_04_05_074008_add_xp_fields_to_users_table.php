@@ -1,0 +1,30 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::table('users', function (Blueprint $table) {
+            if (!Schema::hasColumn('users', 'learning_xp')) {
+                $table->integer('learning_xp')->default(0)->after('type');
+            }
+            if (!Schema::hasColumn('users', 'challenge_xp')) {
+                $table->integer('challenge_xp')->default(0)->after('learning_xp');
+            }
+        });
+    }
+
+    public function down(): void
+    {
+        Schema::table('users', function (Blueprint $table) {
+            $table->dropColumn(['learning_xp', 'challenge_xp']);
+        });
+    }
+};
