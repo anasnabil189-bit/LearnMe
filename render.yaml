@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: learnme-app
+    runtime: php
+    plan: free
+    region: frankfurt
+    buildCommand: composer install
+    startCommand: vendor/bin/heroku-php-apache2 public/
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: APP_DEBUG
+        value: "false"
+      - key: PHP_VERSION
+        value: 8.2
